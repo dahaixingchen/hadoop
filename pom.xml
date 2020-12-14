@@ -6,7 +6,11 @@
 
     <groupId>com.feifei.hadoop</groupId>
     <artifactId>hadoop</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>hdfs</module>
+    </modules>
 
     <properties>
         <jdk.version>1.8</jdk.version>
