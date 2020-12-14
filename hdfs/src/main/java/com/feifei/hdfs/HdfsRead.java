@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,7 +34,7 @@ import java.net.URL;
  **/
 public class HdfsRead {
 
-    Configuration conf= null;
+    Configuration conf = null;
     FileSystem fs = null;
 
 
@@ -42,24 +43,26 @@ public class HdfsRead {
         conf = new Configuration(true);
 //        fs = FileSystem.get(conf);
         //基于集群
-        fs = FileSystem.get(URI.create("hdfs://mycluster/"),conf,"god");
+        fs = FileSystem.get(URI.create("hdfs://mycluster/"), conf, "god");
     }
 
     @Test
     public void mkdir() throws Exception {
         this.connect();
         Path path = new Path("/god");
-        if(fs.exists(path)){
-            fs.delete(path,true);
+        if (fs.exists(path)) {
+            fs.delete(path, true);
         }
         fs.mkdirs(path);
     }
 
     @Test
     public void upload() throws Exception {
-        BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(new File("E:\\tmp\\2020-11-29.log")));
-        FSDataOutputStream fsDataOutputStream = fs.create(new Path("/god/data.txt"));
-        IOUtils.copyBytes(inputStream,fsDataOutputStream,conf,true);
+        File file = new File("E:\\（英语）钟叔资料\\钟叔·逻辑英语 第4季等多个文件\\逻辑英语 第五季\\钟叔·逻辑英语S05E01 - 极致美学作文修辞（上） .mp4");
+//        File file = new File("./data.txt");
+        BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+        FSDataOutputStream fsDataOutputStream = fs.create(new Path("/god/data.mp4"));
+        IOUtils.copyBytes(inputStream, fsDataOutputStream, conf, true);
     }
 
     @Test
