@@ -34,12 +34,12 @@ public class WordCountWindowCluster {
         job.setJobName("myjob");
 
 
-//     源码中提示    *     job.setInputPath(new Path("in"));
-//     源码中提示    *     job.setOutputPath(new Path("out"));
+//     源码中提示的过时了    *     job.setInputPath(new Path("in"));
+//     源码中提示的过时了    *     job.setOutputPath(new Path("out"));
         Path in = new Path("/data/data.txt");
         TextInputFormat.addInputPath(job,in);
 
-        Path out = new Path("/data/out2");
+        Path out = new Path("/data/out22");
 
         //判斷输出文件是否存在，如果存在就删除
         if (in.getFileSystem(configuration).exists(out)){

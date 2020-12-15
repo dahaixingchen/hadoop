@@ -22,8 +22,10 @@ public class WordCountWindowLocal {
 
         Configuration configuration = new Configuration();
 
-        //
+        //window异构平台一定需要这个配置的
         configuration.set("mapreduce.app-submission.cross-platform","true");
+        configuration.set("mapreduce.framework.name","local");
+
 
         // Create a new Job
         Job job = Job.getInstance(configuration);
@@ -34,12 +36,12 @@ public class WordCountWindowLocal {
         job.setJobName("myjob");
 
 
-//     源码中提示    *     job.setInputPath(new Path("in"));
-//     源码中提示    *     job.setOutputPath(new Path("out"));
+//     源码中提示的过时了    *     job.setInputPath(new Path("in"));
+//     源码中提示的过时了    *     job.setOutputPath(new Path("out"));
         Path in = new Path("/data/data.txt");
         TextInputFormat.addInputPath(job,in);
 
-        Path out = new Path("/data/out2");
+        Path out = new Path("/data/out4");
 
         //判斷输出文件是否存在，如果存在就删除
         if (in.getFileSystem(configuration).exists(out)){
@@ -51,6 +53,7 @@ public class WordCountWindowLocal {
 
         job.setMapperClass(MyMapper.class);
         job.setReducerClass(MyReducer.class);
+
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
