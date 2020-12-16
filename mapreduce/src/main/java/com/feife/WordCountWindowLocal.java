@@ -35,6 +35,7 @@ public class WordCountWindowLocal {
         configuration.set("mapreduce.app-submission.cross-platform","true");
         //设置本地运行
         configuration.set("mapreduce.framework.name","local");
+        configuration.set("mapreduce.input.fileinputformat.split.maxsize","1024");
 
 
         // Create a new Job
