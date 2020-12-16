@@ -72,6 +72,12 @@ public class HdfsRead {
 
         for (BlockLocation blockLocation : blockLocations) {
             System.out.println(blockLocation);
+            System.out.println(blockLocation.getHosts());
+            System.out.println(blockLocation.getOffset());
+            System.out.println(blockLocation.getLength());
+            System.out.println(blockLocation.getTopologyPaths());
+            System.out.println(blockLocation.getNames());
+            System.out.println(blockLocation.getCachedHosts());
         }
 
         //        0,        1048576,        node04,node02  A

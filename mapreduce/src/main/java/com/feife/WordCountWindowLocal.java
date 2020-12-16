@@ -14,9 +14,18 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
  * @ClassName: WordCount
  * @Author chengfei
  * @Date 2020/12/14 19:54
- * @Description: TODO
+ * @Description: TODO daf df
  **/
 public class WordCountWindowLocal {
+
+    /**
+     * hadoop 如果要想本地运行，必须要做三步动作
+     *  1. 一定要在window上安装hadoop---拿到线上的hadoop-2.6.0.tar.gz的 jar包（或直接把服务器上的hadoop-2.6.0文件直接拿下来也可以）
+     *      ，把它解压到一个没有中文和空格的目录中
+     *  2. 配置HADOOP_HOME这样的环境变量，它的value值，就是你上面的文件的位置
+     *  3. 最后把hadoop.dll这样一个文件放到 C:\Windows\System32  目录下
+
+     */
     public static void main(String[] args) throws Exception {
 
 
@@ -24,12 +33,12 @@ public class WordCountWindowLocal {
 
         //window异构平台一定需要这个配置的
         configuration.set("mapreduce.app-submission.cross-platform","true");
+        //设置本地运行
         configuration.set("mapreduce.framework.name","local");
 
 
         // Create a new Job
         Job job = Job.getInstance(configuration);
-
         job.setJarByClass(WordCountWindowLocal.class);
 
         // Specify various job-specific parameters
