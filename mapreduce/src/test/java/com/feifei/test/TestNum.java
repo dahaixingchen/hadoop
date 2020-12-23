@@ -28,11 +28,11 @@ public class TestNum {
         List<String> arrayList = new ArrayList<>();
         arrayList = asList;
 
-        for (String s : asList) {
-            System.out.println(s);
-        }
-        for (String s : arrayList) {
-            System.out.println(s);
+        for (int i = 0; i < asList.size(); i++) {
+            if (i == asList.size() -1){
+                break;
+            }
+            System.out.println(asList.get(i));
         }
     }
 }
