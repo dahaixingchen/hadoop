@@ -1,5 +1,11 @@
-package com.feife.mapreduce_case.topN;
+package com.feife.mapreduce_case.topNMapJoin;
 
+import com.feife.mapreduce_case.topN.TGroupingComparator;
+import com.feife.mapreduce_case.topN.TKey;
+import com.feife.mapreduce_case.topN.TMapper;
+import com.feife.mapreduce_case.topN.TPartitioner;
+import com.feife.mapreduce_case.topN.TReduce;
+import com.feife.mapreduce_case.topN.TSortComparator;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -12,7 +18,8 @@ import javax.xml.soap.Text;
 import java.io.IOException;
 
 /**
- * Description: 计算每月气温最高的两天
+ * Description: 计算每月气温最高的两天,添加地区维度表，在map端进行join的操作，这个操作计算一定要在集群上跑
+ * 因为它要把维度表分发到所有的map中
  * @Author chengfei
  * @Date 2020/12/22 19:26
  **/
@@ -24,8 +31,6 @@ public class TopNMapJoin {
         //基础框架的准备(跑jar包的时候输入个性化 的参数和-D对应的参数区别开)
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
 
-        //计算程序在本地跑的话需要做店小手术
-        conf.set("mapreduce.framework.name","local");
         conf.set("mapreduce.app-submission.cross-platform","true");
 
         //基础框架的准备
@@ -33,12 +38,14 @@ public class TopNMapJoin {
         //基础框架的准备
         job.setJarByClass(TopNMapJoin.class);
 
-        job.setJobName("topN");
+        job.setJar("E:\\sturdy\\bigData\\hdoop\\code\\hadoop\\mapreduce\\target\\mapreduce-1.0-SNAPSHOT.jar");
+        job.addCacheFile(new Path("/data/dict/dict.txt").toUri());
+        job.setJobName("topNMapJoin");
 
         //MapReduce阶段的步骤
         //map端
         //0. maptask任务
-        job.setMapperClass(TMapper.class);
+        job.setMapperClass(TMapperMapJoin.class);
 
         //1.input 把数据读进来
         //一般情况下会有多个数据输入路径

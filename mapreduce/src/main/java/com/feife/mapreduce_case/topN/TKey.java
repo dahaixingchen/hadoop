@@ -19,6 +19,9 @@ public class TKey implements WritableComparable<TKey> {
     private int day;
     private int wd;
 
+    //进行map端的join操作的关键字
+    private String joinId;
+
 
     @Override
     public int compareTo(TKey o) {
@@ -43,14 +46,16 @@ public class TKey implements WritableComparable<TKey> {
         out.writeInt(month);
         out.writeInt(day);
         out.writeInt(wd);
+        out.writeUTF(joinId);
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
         this.year = in.readInt();
-        this.month =in.readInt();
-        this.day =in.readInt();
-        this.wd =in.readInt();
+        this.month = in.readInt();
+        this.day = in.readInt();
+        this.wd = in.readInt();
+        this.joinId = in.readUTF();
     }
 
     public int getYear() {
@@ -83,5 +88,13 @@ public class TKey implements WritableComparable<TKey> {
 
     public void setWd(int wd) {
         this.wd = wd;
+    }
+
+    public String getJoinId() {
+        return joinId;
+    }
+
+    public void setJoinId(String joinId) {
+        this.joinId = joinId;
     }
 }
