@@ -77,7 +77,7 @@ public class TopNMapJoin {
         job.setGroupingComparatorClass(TGroupingComparator.class);
 
         //8.reduceTask
-        job.setReducerClass(TReduce.class);
+        job.setReducerClass(TReduceMapJoin.class);
 
         //输出类型的设定
         job.setOutputKeyClass(Text.class);

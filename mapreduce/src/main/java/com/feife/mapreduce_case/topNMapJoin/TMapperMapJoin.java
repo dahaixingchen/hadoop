@@ -1,6 +1,7 @@
 package com.feife.mapreduce_case.topNMapJoin;
 
 import com.feife.mapreduce_case.topN.TKey;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -37,8 +39,8 @@ public class TMapperMapJoin extends Mapper<LongWritable, Text,TKey, IntWritable>
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
         URI[] files = context.getCacheFiles();
-        String path = files[0].getPath();
-        BufferedReader reader = new BufferedReader(new FileReader(new File(path)));
+        Path path = new Path(files[0].getPath());
+        BufferedReader reader = new BufferedReader(new FileReader(new File(path.getName())));
 
         String line = reader.readLine();
         while (line != null){
