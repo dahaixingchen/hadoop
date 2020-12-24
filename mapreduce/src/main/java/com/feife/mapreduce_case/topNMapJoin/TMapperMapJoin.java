@@ -43,6 +43,7 @@ public class TMapperMapJoin extends Mapper<LongWritable, Text,TKey, IntWritable>
         BufferedReader reader = new BufferedReader(new FileReader(new File(path.getName())));
 
         String line = reader.readLine();
+        //文件中如何去掉空行
         while (line != null){
             String[] split = line.split("\t");
             dict.put(split[0],split[1]);
