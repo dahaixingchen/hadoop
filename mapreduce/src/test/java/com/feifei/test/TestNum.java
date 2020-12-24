@@ -3,8 +3,12 @@ package com.feifei.test;
 import org.junit.Test;
 
 import javax.swing.plaf.OptionPaneUI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,5 +38,23 @@ public class TestNum {
             }
             System.out.println(asList.get(i));
         }
+    }
+
+    @Test
+    public void test2() throws ParseException {
+        String str = "2019-6-1 22:22:22";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date parse = sdf.parse(str);
+//        System.out.println(parse);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(parse);
+
+        System.out.println(calendar.get(Calendar.YEAR));
+        System.out.println(calendar.get(Calendar.MONTH) + 1);
+        System.out.println(calendar.get(Calendar.DATE));
+        System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
+
     }
 }

@@ -26,6 +26,7 @@ public class TKey implements WritableComparable<TKey> {
         //但是如果用这个进行后面的排序的话，reduce做的事情比较多，如果我们在map端溢出数据时排序的时候按照
         // ，年 月 且气温倒序的方式排序的话，reduce端就直接取数据了
         // ，所有我们还是得重新写分组排序的比较器的
+        //这个比较器在我们业务中是用不到的
         int c1 = Integer.compare(this.year, o.getYear());
         if (c1 == 0){
             c1 = Integer.compare(this.month, o.getMonth());

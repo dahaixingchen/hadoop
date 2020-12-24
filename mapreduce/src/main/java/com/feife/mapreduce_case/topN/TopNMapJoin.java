@@ -16,7 +16,7 @@ import java.io.IOException;
  * @Author chengfei
  * @Date 2020/12/22 19:26
  **/
-public class TopN {
+public class TopNMapJoin {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         //基础框架的准备
         Configuration conf = new Configuration();
@@ -31,7 +31,7 @@ public class TopN {
         //基础框架的准备
         Job job = Job.getInstance(conf);
         //基础框架的准备
-        job.setJarByClass(TopN.class);
+        job.setJarByClass(TopNMapJoin.class);
 
         job.setJobName("topN");
 
